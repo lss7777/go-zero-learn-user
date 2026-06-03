@@ -1,0 +1,26 @@
+# Binaries
+user.exe
+user
+
+# Logs
+logs/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Go
+*.test
+*.out
+vendor/
+
+# Claude local config (embedded repos & local settings)
+.claude/ai-context/
+.claude/skills/
+.claude/settings.local.json

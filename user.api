@@ -1,0 +1,35 @@
+syntax = "v1"
+
+type (
+	LoginRequest {
+		Username string `json:"username" validate:"required"`
+		Password string `json:"password" validate:"required"`
+	}
+	LoginResponse {
+		AccessToken  string `json:"accessToken"`
+		AccessExpire int64  `json:"accessExpire"`
+		RefreshAfter int64  `json:"refreshAfter"`
+	}
+	RegisterRequest {
+		Username        string `json:"username" validate:"required"`
+		Password        string `json:"password" validate:"required"`
+		ConfirmPassword string `json:"confirmPassword" validate:"required"`
+	}
+	RegisterResponse {
+		Id       int64  `json:"id"`
+		Username string `json:"username"`
+	}
+)
+
+@server (
+	group:  user
+	prefix: /api/v1
+)
+service user {
+	@handler Login
+	post /login (LoginRequest) returns (LoginResponse)
+
+	@handler Register
+	post /register (RegisterRequest) returns (RegisterResponse)
+}
+
