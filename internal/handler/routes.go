@@ -28,4 +28,19 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		},
 		rest.WithPrefix("/api/v1"),
 	)
+
+	server.AddRoutes(
+		rest.WithMiddlewares(
+			[]rest.Middleware{serverCtx.Timing},
+			[]rest.Route{
+				{
+					Method:  http.MethodGet,
+					Path:    "/profile",
+					Handler: user.GetProfileHandler(serverCtx),
+				},
+			}...,
+		),
+		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),
+		rest.WithPrefix("/api/v1"),
+	)
 }

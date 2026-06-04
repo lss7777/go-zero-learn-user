@@ -19,3 +19,7 @@ Redis:
   Host: 127.0.0.1:6379
   Type: node
   Pass: ""
+
+Auth:
+  AccessSecret: "your-secret-key-change-in-production"
+  AccessExpire: 3600

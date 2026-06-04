@@ -12,4 +12,8 @@ type Config struct {
 		DataSource string
 	}
 	Redis redis.RedisConf
+	Auth struct {
+		AccessSecret string
+		AccessExpire int64
+	}
 }

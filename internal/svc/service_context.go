@@ -5,15 +5,18 @@ package svc
 
 import (
 	"user/internal/config"
+	"user/internal/middleware"
 	"user/model"
 
 	"github.com/zeromicro/go-zero/core/stores/cache"
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
+	"github.com/zeromicro/go-zero/rest"
 )
 
 type ServiceContext struct {
 	Config     config.Config
 	UsersModel model.UsersModel
+	Timing     rest.Middleware
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
@@ -26,5 +29,6 @@ func NewServiceContext(c config.Config) *ServiceContext {
 				Weight:    100,
 			},
 		}),
+		Timing: middleware.NewTimingMiddleware().Handle,
 	}
 }

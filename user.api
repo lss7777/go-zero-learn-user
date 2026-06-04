@@ -19,6 +19,10 @@ type (
 		Id       int64  `json:"id"`
 		Username string `json:"username"`
 	}
+	GetProfileResponse {
+		Id       int64  `json:"id"`
+		Username string `json:"username"`
+	}
 )
 
 @server (
@@ -31,5 +35,16 @@ service user {
 
 	@handler Register
 	post /register (RegisterRequest) returns (RegisterResponse)
+}
+
+@server (
+	group:      user
+	prefix:     /api/v1
+	jwt:        Auth
+	middleware: Timing
+)
+service user {
+	@handler GetProfile
+	get /profile returns (GetProfileResponse)
 }
 
